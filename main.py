@@ -1,5 +1,5 @@
 import heapq
-from collections import Counter
+from collections import defaultdict
 
 # Node structure for the Huffman Tree
 class Node:
@@ -30,10 +30,15 @@ def generate_codes(root, current_code, codes):
     generate_codes(root.left, current_code + "0", codes)
     generate_codes(root.right, current_code + "1", codes)
 
-# Huffman Coding function
+# Huffman Coding function without using Counter
 def huffman_coding(text):
-    # Step 1: Count character frequencies
-    frequency = Counter(text)
+    # Step 1: Count character frequencies manually
+    frequency = {}
+    for char in text:
+        if char in frequency:
+            frequency[char] += 1
+        else:
+            frequency[char] = 1
 
     # Step 2: Build the priority queue (min-heap)
     heap = []
@@ -54,11 +59,11 @@ def huffman_coding(text):
     # The root of the tree
     root = heap[0]
 
-    # Step 4: Generate the codes
-    codes = {}
+    # Step 4: Generate the codes using defaultdict
+    codes = defaultdict(str)  # Defaultdict to ensure default empty string for missing keys
     generate_codes(root, "", codes)
 
     # Step 5: Encode the text
     encoded_text = "".join(codes[char] for char in text)
-    return encoded_text
+    return encoded_text  # Convert defaultdict to regular dict for the output
 
