@@ -60,5 +60,5 @@ def huffman_coding(text):
 
     # Step 5: Encode the text
     encoded_text = "".join(codes[char] for char in text)
-    return encoded_text, codes
+    return encoded_text
 
