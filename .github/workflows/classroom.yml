@@ -19,7 +19,7 @@ jobs:
       with:
         timeout: 10
         max-score: 10
-        setup-command: import heapq && from collections import defaultdict
+        setup-command: import heapq; from collections import defaultdict
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
